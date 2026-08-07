@@ -1,25 +1,14 @@
-/* ==========================================================
-   PALETA: "recibo de papel + carimbo de caixa registradora"
-   A ideia é remeter ao objeto real que o app usa: o comprovante.
-   Papel claro pro fundo, tinta escura pro texto, e um verde de
-   "carimbo"/dinheiro só no botão de ação (pra não virar bagunça
-   de cor espalhada por tudo — o verde forte fica reservado só
-   pro elemento mais importante: o botão de ação).
-   ========================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&display=swap');
-/* fonte monoespaçada só pro valor total, pra parecer número de
-   extrato/nota fiscal. Se não carregar (sem internet, por ex.),
-   cai automaticamente no fallback monoespaçado do sistema. */
 
 :root {
-    --papel: #f7f4ea;             /* fundo do "recibo" */
-    --tinta: #1f2e28;             /* texto principal, cor de tinta escura */
-    --tinta-suave: #5b6660;       /* texto secundário (subtítulo, rótulos) */
-    --linha-recibo: #c9cdc3;      /* linha pontilhada, cor de perfuração de papel */
-    --selo-verde: #1f6b46;        /* verde de carimbo/dinheiro - só no botão */
-    --selo-verde-escuro: #164f34; /* hover do botão */
-    --fundo-pagina: #eef1ec;      /* fundo da página, atrás do "recibo" */
+    --papel: #f7f4ea;             
+    --tinta: #1f2e28;             
+    --tinta-suave: #5b6660;       
+    --linha-recibo: #c9cdc3;     
+    --selo-verde: #1f6b46;        
+    --selo-verde-escuro: #164f34; 
+    --fundo-pagina: #eef1ec;      
 }
 
 * {
@@ -35,16 +24,18 @@ body {
     font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
     background-color: var(--fundo-pagina);
     color: var(--tinta);
-    padding: 24px 16px; /* antes não tinha padding no body; agora que ele
-                           tem cor de fundo própria, precisa de respiro
-                           nas bordas pra nada colar na tela */
+    padding: 24px 16px;
 }
 
 h1 {
     margin: 20px;
     font-size: 1.5rem;
-    text-transform: uppercase;
-    letter-spacing: 2px; /* dá uma cara de "cabeçalho de loja" no topo */
+    font-family: "Space Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+    letter-spacing: 2px; 
+}
+
+h1 .ia {
+    color: var(--selo-verde);
 }
 
 p {
@@ -57,41 +48,28 @@ h2 {
     font-family: "Space Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
     font-size: 2.2rem;
     letter-spacing: 1px;
-    /* antes: color: #fcfafa (quase branco) sobre fundo azul claro =
-       baixo contraste. Agora o card é claro e o texto herda a --tinta
-       escura do body, então nem precisei mais forçar cor aqui. */
 }
 
 .conteudo {
     background-color: var(--papel);
-    border: 1px dashed var(--linha-recibo); /* borda pontilhada = parece
-                                                papel cortado, não um card
-                                                de app comum */
-    border-radius: 4px; /* bem menos arredondado que antes (era 10px) */
+    border: 1px dashed var(--linha-recibo); 
+    border-radius: 4px; 
     padding: 16px 10px;
     margin: 20px 0;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08); /* sombra sutil, como se
-                                                    o papel estivesse
-                                                    levemente levantado
-                                                    da mesa */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08); 
 }
 
 .conteudo p {
     text-transform: uppercase;
     letter-spacing: 1px;
     font-size: 0.8rem;
-    /* essa regra só afeta os <p> que estão DENTRO de .conteudo
-       ("Total Gasto" e "X comprovantes lidos") - ficam em caixa
-       alta e menores, tipo rótulo de linha de recibo ("SUBTOTAL").
-       O <p> do subtítulo lá no .topo não é tocado por essa regra. */
+
 }
 
 label {
     display: inline-flex;
     align-items: center;
-    justify-content: center; /* faltava isso: sem ele, o conteúdo do
-                                 label ficava grudado à esquerda mesmo
-                                 com width:100% */
+    justify-content: center; 
     gap: 8px;
     padding: 12px 24px;
     cursor: pointer;
@@ -100,20 +78,11 @@ label {
     width: 100%;
     border-radius: 4px;
     font-weight: 600;
-    transition: background-color 0.2s ease; /* transição suave no hover */
+    transition: background-color 0.2s ease; 
 }
 
 label:hover {
     background-color: var(--selo-verde-escuro);
-}
-
-label::before {
-    content: "📷 Fotografar comprovante";
-    /* texto inserido via CSS só pra visualizarmos o botão agora, já
-       que você pediu pra mexer só no CSS dessa vez. É uma gambiarra
-       aceitável visualmente, mas nem todo leitor de tela confia em
-       texto gerado por CSS. Quando for mexer no HTML de novo, o ideal
-       é colocar esse texto direto dentro do <label> e remover isso. */
 }
 
 input[type="file"] {
