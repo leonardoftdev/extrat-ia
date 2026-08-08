@@ -1,14 +1,13 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&display=swap');
 
 :root {
-    --papel: #f7f4ea;             
-    --tinta: #1f2e28;             
-    --tinta-suave: #5b6660;       
-    --linha-recibo: #c9cdc3;     
-    --selo-verde: #1f6b46;        
-    --selo-verde-escuro: #164f34; 
-    --fundo-pagina: #eef1ec;      
+    --papel: #f7f4ea;
+    --tinta: #1f2e28;
+    --tinta-suave: #5b6660;
+    --linha-recibo: #c9cdc3;
+    --selo-verde: #1f6b46;
+    --selo-verde-escuro: #164f34;
+    --fundo-pagina: #eef1ec;
 }
 
 * {
@@ -31,7 +30,7 @@ h1 {
     margin: 20px;
     font-size: 1.5rem;
     font-family: "Space Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
-    letter-spacing: 2px; 
+    letter-spacing: 2px;
 }
 
 h1 .ia {
@@ -52,11 +51,11 @@ h2 {
 
 .conteudo {
     background-color: var(--papel);
-    border: 1px dashed var(--linha-recibo); 
-    border-radius: 4px; 
+    border: 1px dashed var(--linha-recibo);
+    border-radius: 4px;
     padding: 16px 10px;
     margin: 20px 0;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08); 
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
 .conteudo p {
@@ -69,7 +68,7 @@ h2 {
 label {
     display: inline-flex;
     align-items: center;
-    justify-content: center; 
+    justify-content: center;
     gap: 8px;
     padding: 12px 24px;
     cursor: pointer;
@@ -78,7 +77,7 @@ label {
     width: 100%;
     border-radius: 4px;
     font-weight: 600;
-    transition: background-color 0.2s ease; 
+    transition: background-color 0.2s ease;
 }
 
 label:hover {
@@ -90,4 +89,23 @@ input[type="file"] {
     position: absolute;
     width: 1px;
     height: 1px;
+}
+
+#resultado {
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* espaço entre um comprovante lido e outro */
+    margin: 20px 0;
+}
+
+.comprovante-item {
+    white-space: pre-line;
+    text-align: left;
+    background-color: var(--papel);
+    border: 1px dashed var(--linha-recibo);
+    border-radius: 4px;
+    padding: 16px;
+    font-family: "Space Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+    font-size: 0.9rem;
+    line-height: 1.6;
 }

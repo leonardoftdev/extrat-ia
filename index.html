@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styleclaude.css">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <script src="https://js.puter.com/v2/"></script>
     <title>ExtratIA</title>
 </head>
 
@@ -21,8 +22,10 @@
     </div>
     <label>
         <span aria-hidden="true">📷</span> Adicione o seu comprovante aqui.
-        <input type="file" accept="image/*">
+        <input class="foto" onchange="lerFoto()" type="file" accept="image/*">
     </label>
+    <div id="resultado"></div>
 </body>
+<script src="scripts.js"></script>
 
 </html>
