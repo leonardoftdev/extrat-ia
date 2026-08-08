@@ -126,3 +126,13 @@ input[type="file"] {
 .excluir-item:hover {
     opacity: 1;
 }
+
+@keyframes pulso {
+    0% { transform: scale(1); }
+    30% { transform: scale(1.08); }
+    100% { transform: scale(1); }
+}
+
+.total-gasto.atualizado {
+    animation: pulso 0.4s ease-out;
+}
