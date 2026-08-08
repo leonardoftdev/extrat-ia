@@ -14,15 +14,28 @@ async function lerFoto() {
     let foto = document.querySelector(".foto").files[0]
     let resultado = document.querySelector("#resultado")
 
-    // cria um bloco novo só pra ESSE comprovante
     let bloco = document.createElement("div")
     bloco.className = "comprovante-item"
-    bloco.textContent = "Lendo comprovante..."
-    resultado.prepend(bloco) // adiciona no final, sem apagar os anteriores
+
+    
+    let botaoExcluir = document.createElement("button")
+    botaoExcluir.className = "excluir-item"
+    botaoExcluir.textContent = "🗑️"
+    botaoExcluir.type = "button" 
+    botaoExcluir.setAttribute("aria-label", "Excluir este comprovante")
+    botaoExcluir.onclick = () => bloco.remove()
+
+   
+    let textoEl = document.createElement("p")
+    textoEl.className = "comprovante-texto"
+    textoEl.textContent = "Lendo comprovante..."
+
+    bloco.appendChild(botaoExcluir)
+    bloco.appendChild(textoEl)
+    resultado.prepend(bloco)
 
     let resposta = await puter.ai.chat(pedido, foto)
     let texto = resposta.message.content
 
-    bloco.textContent = texto
-
+    textoEl.textContent = texto 
 }
