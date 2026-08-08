@@ -36,18 +36,47 @@ async function lerFoto() {
     let foto = document.querySelector(".foto").files[0]
     let resultado = document.querySelector("#resultado")
 
-
     let bloco = document.createElement("div")
     bloco.className = "comprovante-item"
-
 
     let botaoExcluir = document.createElement("button")
     botaoExcluir.className = "excluir-item"
     botaoExcluir.textContent = "🗑️"
     botaoExcluir.type = "button"
     botaoExcluir.setAttribute("aria-label", "Excluir este comprovante")
-    botaoExcluir.onclick = () => bloco.remove()
 
+    botaoExcluir.onclick = () => {
+        let valorDoItem = Number(bloco.dataset.valor)
+
+        // só desconta se esse comprovante já tinha sido somado ao total -
+        // se ainda estiver "Lendo comprovante...", dataset.valor nem existe ainda
+        if (!isNaN(valorDoItem)) {
+            let totalAntigo = total
+            let contadorAntigo = contador
+
+            total -= valorDoItem
+            contador--
+
+            animarNumero(
+                document.querySelector(".total-gasto"),
+                totalAntigo,
+                total,
+                valor => valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })
+            )
+
+            animarNumero(
+                document.querySelector(".contador-comprovantes"),
+                contadorAntigo,
+                contador,
+                valor => {
+                    let n = Math.round(valor)
+                    return `${n} comprovante${n === 1 ? "" : "s"} lido${n === 1 ? "" : "s"}`
+                }
+            )
+        }
+
+        bloco.remove()
+    }
 
     let textoEl = document.createElement("p")
     textoEl.className = "comprovante-texto"
@@ -60,15 +89,16 @@ async function lerFoto() {
     let resposta = await puter.ai.chat(pedido, foto)
     let texto = resposta.message.content
     let partes = texto.split("💰 Total: R$")
-    console.log(partes)
 
     textoEl.textContent = texto
 
-    let valorTotal = partes[1].trim().replace(",", ".")
+    let valorTotal = Number(partes[1].trim().replace(",", "."))
+    bloco.dataset.valor = valorTotal // guarda o valor DESSE comprovante no próprio elemento
+
     let totalAntigo = total
     let contadorAntigo = contador
 
-    total += Number(valorTotal)
+    total += valorTotal
     contador++
 
     animarNumero(
@@ -88,12 +118,7 @@ async function lerFoto() {
         }
     )
 
-    document.querySelector(".total-gasto").textContent = `R$ ${total.toFixed(2)}`
-    document.querySelector(".contador-comprovantes").textContent = `${contador} comprovante${contador === 1 ? "" : "s"} lido${contador === 1 ? "" : "s"}`
-
     let totalEl = document.querySelector(".total-gasto")
     totalEl.classList.add("atualizado")
     setTimeout(() => totalEl.classList.remove("atualizado"), 400)
-
-
 }
