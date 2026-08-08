@@ -55,7 +55,7 @@ extratia/
 
 ## 📸 Preview
 
-[Preview do ExtratIA](./screenshots/preview.png)
+![Preview do ExtratIA](./screenshots/preview.png)
 
 ---
 
