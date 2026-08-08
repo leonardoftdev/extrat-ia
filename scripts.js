@@ -4,15 +4,15 @@ function animarNumero(elemento, valorAntigo, valorNovo, formatar, duracao = 600)
     function passo(timestampAtual) {
         if (inicio === null) inicio = timestampAtual
         let tempoDecorrido = timestampAtual - inicio
-        let progresso = Math.min(tempoDecorrido / duracao, 1) // vai de 0 até 1
+        let progresso = Math.min(tempoDecorrido / duracao, 1) 
 
-        let progressoComEasing = 1 - Math.pow(1 - progresso, 3) // ease-out: começa rápido, desacelera no final - fica mais natural que velocidade constante
+        let progressoComEasing = 1 - Math.pow(1 - progresso, 3) 
 
         let valorAtual = valorAntigo + (valorNovo - valorAntigo) * progressoComEasing
         elemento.textContent = formatar(valorAtual)
 
         if (progresso < 1) {
-            requestAnimationFrame(passo) // ainda não terminou, agenda o próximo quadro
+            requestAnimationFrame(passo) 
         }
     }
 
@@ -48,8 +48,7 @@ async function lerFoto() {
     botaoExcluir.onclick = () => {
         let valorDoItem = Number(bloco.dataset.valor)
 
-        // só desconta se esse comprovante já tinha sido somado ao total -
-        // se ainda estiver "Lendo comprovante...", dataset.valor nem existe ainda
+
         if (!isNaN(valorDoItem)) {
             let totalAntigo = total
             let contadorAntigo = contador
@@ -93,7 +92,7 @@ async function lerFoto() {
     textoEl.textContent = texto
 
     let valorTotal = Number(partes[1].trim().replace(",", "."))
-    bloco.dataset.valor = valorTotal // guarda o valor DESSE comprovante no próprio elemento
+    bloco.dataset.valor = valorTotal 
 
     let totalAntigo = total
     let contadorAntigo = contador
